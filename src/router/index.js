@@ -36,6 +36,11 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  {
+    path: '/register',
+    component: () => import('@/views/register/index'),
+    hidden: true
+  },
 
   {
     path: '/404',
@@ -51,118 +56,124 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'el-icon-s-home' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/announcement',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/announcement/index',
+    name: 'announcementManage',
+    meta: { title: '公告功能', icon: 'el-icon-s-help' },
+    children:[
+    { path: 'announcement',
+      name: 'announcement',
+      component: () => import('@/views/announcement/index'),
+      meta: { title: '公告', icon: 'el-icon-view' }
+    }
+    ]
+  },
+
+    {
+    path: '/ReleaseQuery',
+    component: Layout,
+    redirect: '/ReleaseQuery/index',
+    name: 'ReleaseQueryManage',
+    meta: { title: '查询功能', icon: 'el-icon-s-help' },
+    children:[
+    { path: 'ReleaseQuery',
+      name: 'ReleaseQuery',
+      component: () => import('@/views/ReleaseQuery/index'),
+      meta: { title: '查询提交放行', icon: 'el-icon-search' }
+    }]
+  },
+
+  {
+    path: '/appeal',
+    component: Layout,
+    redirect: '/appeal/index',
+    name: 'appealManage',
+    meta: { title: '申述功能', icon: 'el-icon-s-help' },
+    children:[
+    { path: 'appealQuery',
+      name: 'appealQuery',
+      component: () => import('@/views/appeal/index'),
+      meta: { title: '申述', icon: 'el-icon-s-help' }
+    }]
+  },
+    {
+    path: '/ship',
+    component: Layout,
+    redirect: '/ship/index',
+    name: 'shipManage',
+    meta: { title: '所属船只信息', icon: 'el-icon-s-help' },
+    children:[
+    { path: 'ship',
+      name: 'ship',
+      component: () => import('@/views/ship/index'),
+      meta: { title: '修改船只信息', icon: 'el-icon-edit-outline' }
+    }
+    ]
+  },
+]
+
+export const asyncRoutes = [
+  {
+    path: '/sys',
+    component: Layout,
+    redirect: '/sys/user',
+    name: 'sysManage',
+    meta: { title: '系统管理', icon: 'el-icon-user-solid' , roles: ['admin','root']},
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'announcement',
+        name: 'announcements',
+        component: () => import('@/views/sys/announcement'),
+        meta: { title: '公告管理', icon: '' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'clearance',
+        name: 'clearance',
+        component: () => import('@/views/sys/clearance'),
+        meta: { title: '放行管理', icon: '' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
+        path: 'appeals',
+        name: 'appeals',
+        component: () => import('@/views/sys/appeals'),
+        meta: { title: '申述管理', icon: '' }
+      },
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'ship',
+        name: 'ship',
+        component: () => import('@/views/sys/ship'),
+        meta: { title: '船舶管理', icon: '' }
+      },
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/sys/user'),
+        meta: { title: '用户管理', icon: '' }
       }
     ]
   },
-
-  // 404 page must be placed at the end !!!
+  {
+    path: '/backsys',
+    component: Layout,
+    redirect: '/backsys/user',
+    name: 'rootManage',
+    meta: { title: '后台功能', icon: 'el-icon-s-help', roles: ['root']},
+    children:[
+    { path: '/backsys/user',
+      name: 'root',
+      component: () => import('@/views/backsys/user'),
+      meta: { title: '管理员后台', icon: 'el-icon-user' }
+    },]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
+
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
